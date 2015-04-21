@@ -5,8 +5,6 @@ using namespace BOOOS;
 
 Queue::Queue() {
   this->_length = 0;
-  this->head()->next(this->head());
-  this->head()->prev(this->head());
 }
 
 Queue::~Queue() {
