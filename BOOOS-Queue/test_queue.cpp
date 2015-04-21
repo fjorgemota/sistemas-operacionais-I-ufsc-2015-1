@@ -45,29 +45,20 @@ int main() {
     MyElement * person2 = new MyElement("Pedro");
     MyElement * person3 = new MyElement("Augusto");
     MyElement * person4 = new MyElement("Fábio");
-    print_queue(queue);
  
     queue.insert(person1);
-    print_queue(queue);
     queue.insert(person2);
-    print_queue(queue);
     queue.insert(person3);
-    print_queue(queue);
     queue.insert(person4);
-    print_queue(queue);
  
     MyElement * removed_person = dynamic_cast<MyElement*>(queue.remove());
     delete removed_person; // Which element was removed?
-    print_queue(queue);
     removed_person = dynamic_cast<MyElement*>(queue.remove());
     delete removed_person; // Which element was removed?
-    print_queue(queue);
     removed_person = dynamic_cast<MyElement*>(queue.remove());
     delete removed_person; // Which element was removed?
-    print_queue(queue);
     removed_person = dynamic_cast<MyElement*>(queue.remove());
     delete removed_person; // Which element was removed?
-    print_queue(queue);
  
     return 0;
 } 
