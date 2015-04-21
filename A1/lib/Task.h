@@ -20,6 +20,8 @@ public:
 		RUNNING,
 		FINISHING
 	};
+	
+	Task(void (*entry_point)(void), int nargs, void * arg);
 
 	Task(void (*entry_point)(void*), int nargs, void * arg);
 	virtual ~Task();

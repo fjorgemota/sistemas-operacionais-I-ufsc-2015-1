@@ -16,12 +16,23 @@ Task* Task::__main;
 int Task::STACK_SIZE = 32768;
 int Task::__tid_counter = 2;
 
+Task::Task(void (*entry_point)(void), int nargs, void * arg) {
+	this->_state = Task::READY;
+	this->_stack = new char[Task::STACK_SIZE];
+	this->_tid = Task::__tid_counter++;
+	getcontext(&(this->context));
+	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
+    this->context.uc_stack.ss_sp   = this->_stack;
+    this->context.uc_stack.ss_size = Task::STACK_SIZE;
+	makecontext(&(this->context), (void (*)()) entry_point, nargs, arg);
+}
+
 Task::Task(void (*entry_point)(void*), int nargs, void * arg) {
 	this->_state = Task::READY;
 	this->_stack = new char[Task::STACK_SIZE];
 	this->_tid = Task::__tid_counter++;
 	getcontext(&(this->context));
-	this->context.uc_link          = &(Task::__main->context);
+	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
     this->context.uc_stack.ss_sp   = this->_stack;
     this->context.uc_stack.ss_size = Task::STACK_SIZE;
 	makecontext(&(this->context), (void (*)()) entry_point, nargs, arg);
