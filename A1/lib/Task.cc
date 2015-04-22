@@ -1,4 +1,4 @@
-/*
+/* Fernando Jorge Mota (13200641) e Caique Rodrigues Marques (13204303)
  * Task.cc
  *
  *  Created on: Feb 27, 2014
@@ -24,7 +24,7 @@ Task::Task(void (*entry_point)(void), int nargs, void * arg) {
 	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
     this->context.uc_stack.ss_sp   = this->_stack;
     this->context.uc_stack.ss_size = Task::STACK_SIZE;
-	makecontext(&(this->context), (void (*)()) entry_point, nargs, arg);
+	makecontext(&(this->context), (void (*)(void)) entry_point, nargs, arg);
 }
 
 Task::Task(void (*entry_point)(void*), int nargs, void * arg) {
@@ -35,7 +35,7 @@ Task::Task(void (*entry_point)(void*), int nargs, void * arg) {
 	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
     this->context.uc_stack.ss_sp   = this->_stack;
     this->context.uc_stack.ss_size = Task::STACK_SIZE;
-	makecontext(&(this->context), (void (*)()) entry_point, nargs, arg);
+	makecontext(&(this->context), (void (*)(void)) entry_point, nargs, arg);
 }
 
 Task::Task() {
