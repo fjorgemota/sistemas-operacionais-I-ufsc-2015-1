@@ -10,8 +10,6 @@ LINKPATH := $(BOOOS)/lib
 
 GDB_DEBUG := 1
 
-TEST := Task_Test
-
 CXXFLAGS := -I$(INCLUDEPATH) -std=c++0x
 LDFLAGS := -L$(LINKPATH) -lrt
 
