@@ -14,12 +14,12 @@ namespace BOOOS
 volatile Task * Task::__running;
 Task* Task::__main;
 int Task::STACK_SIZE = 32768;
-int Task::__tid_counter = 2;
+int Task::__tid_counter = 1;
 
 Task::Task(void (*entry_point)(void), int nargs, void * arg) {
 	this->_state = Task::READY;
 	this->_stack = new char[Task::STACK_SIZE];
-	this->_tid = Task::__tid_counter++;
+	this->_tid = ++Task::__tid_counter;
 	getcontext(&(this->context));
 	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
     this->context.uc_stack.ss_sp   = this->_stack;
@@ -30,7 +30,7 @@ Task::Task(void (*entry_point)(void), int nargs, void * arg) {
 Task::Task(void (*entry_point)(void*), int nargs, void * arg) {
 	this->_state = Task::READY;
 	this->_stack = new char[Task::STACK_SIZE];
-	this->_tid = Task::__tid_counter++;
+	this->_tid = ++Task::__tid_counter;
 	getcontext(&(this->context));
 	this->context.uc_link          = (ucontext_t*) &(Task::__running->context);
     this->context.uc_stack.ss_sp   = this->_stack;
@@ -58,7 +58,7 @@ void Task::pass_to(Task *t, State s) {
 }
 
 void Task::init() {
-	Task::__tid_counter = 2;
+	Task::__tid_counter = 1;
 	Task::__main = new Task();
 	Task::__running = Task::__main;
 	Task::__running->_state = Task::RUNNING;
