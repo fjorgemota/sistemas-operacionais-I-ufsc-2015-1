@@ -1,4 +1,4 @@
-/* Fernando Jorge Mota (13200641) e Caique Rodrigues Marques (13204303)
+/* Caique Rodrigues Marques (13204303) e Fernando Jorge Mota (13200641)
  * Task.cc
  *
  *  Created on: Feb 27, 2014
